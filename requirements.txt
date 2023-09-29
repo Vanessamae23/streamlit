@@ -2,8 +2,6 @@ statsmodels==0.14.0
 streamlit
 Pyrebase4
 Image
-pyrebase
-pycrypto
 pandas 
 numpy 
 matplotlib==3.8.0
