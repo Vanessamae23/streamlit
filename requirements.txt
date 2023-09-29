@@ -1,0 +1,8 @@
+json
+streamlit
+pyrebase
+pandas 
+numpy 
+statsmodels.api 
+matplotlib.pyplot 
+transformers
