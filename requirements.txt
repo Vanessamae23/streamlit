@@ -3,6 +3,6 @@ streamlit
 pyrebase
 pandas 
 numpy 
-statsmodels.api 
-matplotlib.pyplot 
+statsmodels
+matplotlib
 transformers
