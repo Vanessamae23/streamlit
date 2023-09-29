@@ -1,4 +1,4 @@
-statsmodels
+statsmodels=0.14.0
 streamlit
 Pyrebase4
 Image
