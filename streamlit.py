@@ -33,8 +33,7 @@ def employee_data():
     
     data = db.child('employees').get()
     json_data = json.dumps(data.val(), indent=4)
-    df = pd.read_json(json_data)
-    df.set_index('name', inplace=True)
+    df = pd.read_json(json_data).T
     # Apply styling to the DataFrame
     th_props = [
       ('font-size', '14px'),
@@ -63,11 +62,11 @@ def analytics_dashboard():
     #Skills
     data = db.child('employees').get()
     json_data = json.dumps(data.val(), indent=4)
-    df = pd.read_json(json_data)
+    df = pd.read_json(json_data).T
 
     skills_data = db.child('skills').get()
     skills_json_data = json.dumps(skills_data.val(), indent=4)
-    skills_df = pd.read_json(skills_json_data)
+    skills_df = pd.read_json(skills_json_data).T
     skills_df.style
     # Calculate the mean for each skill
     skill_means = skills_df.mean()
@@ -80,7 +79,7 @@ def analytics_dashboard():
         
         y = df['performance'].tolist()
         x = skills_df[skill_column].tolist()[0:len(y)]
-        
+        y = y[0:min(len(x), len(y))]
         # Adding the constant term
         x = sm.add_constant(x)
         
@@ -117,7 +116,8 @@ def ai_insights():
     feedback_sentiment_pipeline = load_sentiment_pipeline()
     feedback_data = db.child('feedback').get()
     feedback_json_data = json.dumps(feedback_data.val(), indent=4)
-    feedback_df = pd.read_json(feedback_json_data)
+    json_dict = json.loads(feedback_json_data)
+    feedback_df = pd.DataFrame(json_dict.values())
     feedback_df.rename(columns = {0:'feedback'}, inplace = True)
     feedback_df['Sentiment (1 to 5)'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['label'][:-5])
     feedback_df['score'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['score'])
@@ -161,9 +161,6 @@ if selected_view in views:
 else:
     st.write("Invalid view selection.")
 
-
-main_data_fb = db.get()
-main_data = json.dumps(main_data_fb.val(), indent = 4)
 
 
 
