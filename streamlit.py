@@ -1,5 +1,5 @@
 import json
-
+from PIL import Image
 import streamlit as st
 import pyrebase
 import pandas as pd
@@ -9,9 +9,10 @@ import matplotlib.pyplot as plt
 from models import load_sentiment_pipeline
 from firebase import db
 
+
 # Streamlit page configs
-st.set_page_config(layout="wide", page_title="Nautical HR Analytics")
-st.image('./banner.png')
+st.set_page_config(layout="wide", page_title="Nautical HR Analytics", page_icon=Image.open('./images/favicon.ico'))
+st.image('./images/banner.png')
 st.title("Nautical HR Analytics")
 
 
