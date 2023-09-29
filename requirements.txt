@@ -1,6 +1,6 @@
 json
 streamlit
-pyrebase4
+Pyrebase4
 pandas 
 numpy 
 statsmodels

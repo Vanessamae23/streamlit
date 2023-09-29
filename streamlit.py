@@ -9,9 +9,8 @@ import matplotlib.pyplot as plt
 from models import load_sentiment_pipeline
 from firebase import db
 
-# Set the page layout to "wide"
-st.set_page_config(layout="wide")
-
+# Streamlit page configs
+st.set_page_config(layout="wide", page_title="Nautical HR Analytics")
 st.image('./banner.png')
 st.title("Nautical HR Analytics")
 
