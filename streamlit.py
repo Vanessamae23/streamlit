@@ -85,7 +85,8 @@ def analytics_dashboard():
         
         # Performing the regression and fitting the model
         result = sm.OLS(y, x).fit()
-        
+        print("Shape of y:", y.shape)
+        print("Shape of x:", x.shape)
         # Create a new figure for each skill plot
         fig, ax = plt.subplots(figsize=(8, 6))
         
