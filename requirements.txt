@@ -4,6 +4,6 @@ Pyrebase4
 Image
 pandas 
 numpy 
-matplotlib==3.8.0
-transformers
+matplotlib
+transformers==4.33.3
 tensorflow
