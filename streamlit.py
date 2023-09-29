@@ -12,11 +12,19 @@ from firebase import db
 
 # Streamlit page configs
 
-# page_icon = Image.open(os.path.join(os.getcwd(),'images/compass.png').replace("\\","/"))
-page_icon = Image.open('C:\Users/user/Documents/NUS/PSA/images/compass.png')
-st.set_page_config(layout="wide", page_title="Nautical HR Analytics", page_icon=page_icon)
+# page_icon = Image.open(os.path.join(os.getcwd(),"images\\compass.png"))
+st.set_page_config(layout="wide", page_title="Nautical HR Analytics")
 st.image('images/banner.png')
 st.title("Nautical HR Analytics")
+
+hide_default_format = """
+       <style>
+       #MainMenu {visibility: hidden; }
+       footer {visibility: hidden;}
+       </style>
+       """
+st.markdown(hide_default_format, unsafe_allow_html=True)
+
 
 
 # Create a function for each view or tab
