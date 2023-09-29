@@ -4,6 +4,6 @@ Pyrebase4
 pyrebase
 pandas 
 numpy 
-statsmodels
-matplotlib
+statsmodels.api
+matplotlib.pyplot
 transformers
