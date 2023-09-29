@@ -1,9 +1,10 @@
+statsmodels
 streamlit
 Pyrebase4
+Image
 pyrebase
 pycrypto
 pandas 
 numpy 
-statsmodels
 matplotlib
 transformers
