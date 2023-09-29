@@ -2,14 +2,14 @@ import pyrebase
 import streamlit as st
 
 firebaseConfig = {
-  "apiKey": "AIzaSyBNG1qn6ifqFPl51nhw7m1ri8bhbOeTTpI",
-  "authDomain": "portability-55894.firebaseapp.com",
-  "projectId": "portability-55894",
-  "storageBucket": "portability-55894.appspot.com",
-  "messagingSenderId": "25950230197",
-  "appId": "1:25950230197:web:5905b77232c86e3d5cd0fc",
-  "measurementId": "G-XCFM083G0H",
-  "databaseURL" : "https://portability-55894-default-rtdb.asia-southeast1.firebasedatabase.app/"
+  "apiKey": st.secrets["apiKey"],
+  "authDomain": st.secrets["authDomain"],
+  "projectId": st.secrets["projectId"],
+  "storageBucket": st.secrets["storageBucket"],
+  "messagingSenderId": st.secrets["messagingSenderId"],
+  "appId": st.secrets["appId"],
+  "measurementId": st.secrets["measurementId"],
+  "databaseURL" : st.secrets["databaseURL"]
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)

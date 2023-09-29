@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
-from models import load_sentiment_pipeline
+from models import load_sentiment_pipeline, load_skills_regonition_pipeline
 from firebase import db
 
 
