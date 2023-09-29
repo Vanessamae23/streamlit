@@ -6,5 +6,5 @@ pyrebase
 pycrypto
 pandas 
 numpy 
-matplotlib
+matplotlib=3.8.0
 transformers

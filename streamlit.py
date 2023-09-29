@@ -4,16 +4,15 @@ from PIL import Image
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import statsmodels.api as sm
+import matplotlib.pyplot as plt
 from models import load_sentiment_pipeline
 from firebase import db
 
 
 # Streamlit page configs
-script_dir = os.path.dirname(os.path.abspath(__file__))
-page_icon = Image.open(os.path.join(script_dir, 'images/compass.png'))
 
+page_icon = Image.open(os.path.join(os.getcwd(),'images/compass.png'))
 
 st.set_page_config(layout="wide", page_title="Nautical HR Analytics", page_icon=page_icon)
 st.image('images/banner.png')
