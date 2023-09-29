@@ -1,9 +1,9 @@
-json
 streamlit
 Pyrebase4
 pyrebase
+pycrypto
 pandas 
 numpy 
-statsmodels.api
-matplotlib.pyplot
+statsmodels
+matplotlib
 transformers

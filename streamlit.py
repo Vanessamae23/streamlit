@@ -10,8 +10,8 @@ from firebase import db
 
 
 # Streamlit page configs
-st.set_page_config(layout="wide", page_title="Nautical HR Analytics", page_icon=Image.open('./images/favicon.ico'))
-st.image('./images/banner.png')
+st.set_page_config(layout="wide", page_title="Nautical HR Analytics", page_icon=Image.open('/images/compass.png'))
+st.image('images/banner.png')
 st.title("Nautical HR Analytics")
 
 
