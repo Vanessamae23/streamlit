@@ -77,16 +77,15 @@ def analytics_dashboard():
 
     # Perform linear regression and create regression line plots for each skill
     for skill_column in skills_df.columns:
-        x = skills_df[skill_column].tolist()
+        
         y = df['performance'].tolist()
+        x = skills_df[skill_column].tolist()[0:len(y)]
         
         # Adding the constant term
         x = sm.add_constant(x)
         
         # Performing the regression and fitting the model
         result = sm.OLS(y, x).fit()
-        print("Shape of y:", y.shape)
-        print("Shape of x:", x.shape)
         # Create a new figure for each skill plot
         fig, ax = plt.subplots(figsize=(8, 6))
         
