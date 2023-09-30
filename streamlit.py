@@ -6,15 +6,14 @@ import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
-from models import load_sentiment_pipeline, load_skills_regonition_pipeline, generate_recommendations
+from models import load_sentiment_pipeline, load_skills_recognition_pipeline, generate_recommendations
 from firebase import db
 from firebase import auth
 
 
 # Streamlit page configs
 
-page_icon = Image.open('images/compass.png')
-st.set_page_config(layout="wide", page_title="Nautical HR Analytics", page_icon=page_icon)
+st.set_page_config(layout="wide", page_title="Nautical HR Analytics", page_icon="🧭")
 st.image('images/banner.png')
 st.title("Nautical HR Analytics")
 

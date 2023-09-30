@@ -8,13 +8,13 @@ def load_sentiment_pipeline():
     return pipeline(model="nlptown/bert-base-multilingual-uncased-sentiment")
 
 @st.cache_resource
-def load_skills_regonition_pipeline():
+def load_skills_recognition_pipeline():
     return pipeline(model="algiraldohe/lm-ner-linkedin-skills-recognition")
 
 
-ROLE_PLAY_HUMAN_RESOURES_PROMPT = "As a professional human resources manager, give recommendations for upskilling and career development in an encouraging and motivating tone to the following employee with profile:"
+ROLE_PLAY_HUMAN_RESOURES_PROMPT = "As a professional human resources manager, give recommendations for upskilling and career development in an encouraging and motivating tone to the following employee with profile."
 
-openai.api_key = st.secrets["API_KEY"]
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 def generate_recommendations(employee_data):
     content = ROLE_PLAY_HUMAN_RESOURES_PROMPT + parse_employee_data(employee_data)
@@ -24,7 +24,7 @@ def generate_recommendations(employee_data):
         temperature=0.6
     )
     return {
-        "ai_recommendations": response.choices[0].message.content
+        "Recommendations": response.choices[0].message.content
     }
 
 def parse_employee_data(employee_data):
