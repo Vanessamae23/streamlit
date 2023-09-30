@@ -254,52 +254,51 @@ else :
       json_data = json.dumps(data.val(), indent=4)
       df = pd.read_json(json_data).T
 
-    skills_data = db.child('skills').get()
-    skills_json_data = json.dumps(skills_data.val(), indent=4)
-    skills_df = pd.read_json(skills_json_data).T
-    skills_df.style
-    # Calculate the mean for each skill
-    skill_means = skills_df.mean()
-    db.child("skill_means").set(skill_means.to_dict())
-    # Display the mean values in a bar chart using Streamlit
-    st.bar_chart(skill_means)
+      skills_data = db.child('skills').get()
+      skills_json_data = json.dumps(skills_data.val(), indent=4)
+      skills_df = pd.read_json(skills_json_data).T
+      skills_df.style
+      # Calculate the mean for each skill
+      skill_means = skills_df.mean()
+      db.child("skill_means").set(skill_means.to_dict())
+      # Display the mean values in a bar chart using Streamlit
+      st.bar_chart(skill_means)
 
-    col1, col2, col3, col4 = st.columns([1,1,1,1])
+      col1, col2, col3, col4 = st.columns([1,1,1,1])
 
       # Perform linear regression and create regression line plots for each skill
       for skill_column in skills_df.columns:
-          
-          y = df['performance'].tolist()
-          x = skills_df[skill_column].tolist()[0:len(y)]
-          y = y[0:min(len(x), len(y))]
-          # Adding the constant term
-          x = sm.add_constant(x)
-          
-          # Performing the regression and fitting the model
-          result = sm.OLS(y, x).fit()
-          # Create a new figure for each skill plot
-          fig, ax = plt.subplots(figsize=(8, 6))
-          
-          max_x = skills_df[skill_column].max()
-          min_x = skills_df[skill_column].min()
-          x_values = np.arange(min_x, max_x, 1)
-          y_values = result.params[1] * x_values + result.params[0]
-          
-          # Plot the regression line
-          ax.plot(x_values, y_values, 'r', label='Regression Line')
-          
-          # Set labels and legend
-          ax.set_xlabel(skill_column.upper())
-          ax.set_ylabel("Performance")
-          ax.legend()
-          
-          final = round(result.params[1], 2)
-          st.subheader(skill_column.upper())
-          st.markdown("By increasing the company's " + skill_column + " skill, performance can change by " + str(final))
+        y = df['performance'].tolist()
+        x = skills_df[skill_column].tolist()[0:len(y)]
+        y = y[0:min(len(x), len(y))]
+        # Adding the constant term
+        x = sm.add_constant(x)
+        
+        # Performing the regression and fitting the model
+        result = sm.OLS(y, x).fit()
+        # Create a new figure for each skill plot
+        fig, ax = plt.subplots(figsize=(8, 6))
+        
+        max_x = skills_df[skill_column].max()
+        min_x = skills_df[skill_column].min()
+        x_values = np.arange(min_x, max_x, 1)
+        y_values = result.params[1] * x_values + result.params[0]
+        
+        # Plot the regression line
+        ax.plot(x_values, y_values, 'r', label='Regression Line')
+        
+        # Set labels and legend
+        ax.set_xlabel(skill_column.upper())
+        ax.set_ylabel("Performance")
+        ax.legend()
+        
+        final = round(result.params[1], 2)
+        st.subheader(skill_column.upper())
+        st.markdown("By increasing the company's " + skill_column + " skill, performance can change by " + str(final))
 
-          
-          # Display the plot in Streamlit
-          st.pyplot(fig)
+        
+        # Display the plot in Streamlit
+        st.pyplot(fig)
 
 
 def ai_insights():
