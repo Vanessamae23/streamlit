@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
-from models import load_sentiment_pipeline, load_skills_regonition_pipeline
+from models import load_sentiment_pipeline, load_skills_regonition_pipeline, generate_recommendations
 from firebase import db
 
 
@@ -33,7 +33,8 @@ def employee_data():
     
     data = db.child('employees').get()
     json_data = json.dumps(data.val(), indent=4)
-    df = pd.read_json(json_data).T
+    json_dict = json.loads(json_data)
+    df = pd.DataFrame(json_dict.values())
     
     # Apply styling to the DataFrame
     th_props = [
@@ -122,7 +123,7 @@ def ai_insights():
     feedback_df.rename(columns = {0:'feedback'}, inplace = True)
     feedback_df['Sentiment (1 to 5)'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['label'][:-5])
     feedback_df['score'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['score'])
-
+    
     # Define a function to apply text wrap styling to the DataFrame
     th_props = [
       ('font-size', '14px'),
@@ -144,6 +145,19 @@ def ai_insights():
     ]
     df2 = feedback_df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
     st.table(df2)
+
+
+    #Employee upskilling
+
+    employee_data = db.child('employees').get()
+    employee_df = pd.DataFrame(map(lambda x: generate_recommendations(x),list(employee_data)))
+    df3 = employee_df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
+    
+    st.table(df3)
+
+    # feedback_df['Get Recommendations'] =  feedback_data.val().apply(lambda x: generate_recommendations(employee_data.child(x).get()))
+
+
 
 
 # Create a sidebar with tabs
