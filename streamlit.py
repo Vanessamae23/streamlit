@@ -34,6 +34,7 @@ def employee_data():
     data = db.child('employees').get()
     json_data = json.dumps(data.val(), indent=4)
     df = pd.read_json(json_data).T
+    
     # Apply styling to the DataFrame
     th_props = [
       ('font-size', '14px'),
