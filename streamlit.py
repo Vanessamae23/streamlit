@@ -181,8 +181,6 @@ if 'authenticated' not in st.session_state:
             st.write("Invalid view selection.")
       except Exception as e : 
               st.info(e)
-      else :    
-          st.write("Welcome")
 else :
   
   def employee_data():
@@ -232,7 +230,7 @@ else :
       # Display the mean values in a bar chart using Streamlit
       st.bar_chart(skill_means)
 
-      cols = st.columns([1,1,1,1])
+      cols = st.columns([1,1,1,1,1])
 
       # Perform linear regression and create regression line plots for each skill
       col_num = 0
@@ -307,7 +305,7 @@ else :
       #Employee upskilling
 
     employee_data = db.child('employees').get()
-    employee_df = pd.DataFrame(map(lambda x: generate_recommendations(x),list(employee_data)), columns=['Recommendations'])
+    employee_df = pd.DataFrame(map(lambda x: generate_recommendations(x),list(employee_data)))
 
 
     df3 = employee_df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
