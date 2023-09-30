@@ -263,6 +263,8 @@ def analytics_dashboard():
     # Display the mean values in a bar chart using Streamlit
     st.bar_chart(skill_means)
 
+    col1, col2, col3, col4 = st.columns([1,1,1,1])
+
     # Perform linear regression and create regression line plots for each skill
     for skill_column in skills_df.columns:
         
@@ -317,14 +319,12 @@ def ai_insights():
       ('text-align', 'left'),
       ('font-weight', 'bold'),
       ('color', '#fff'),
-      ('text-transform', 'uppercase'),
       ('background-color', '#808080')
       ]
                                   
     td_props = [
       ('font-size', '12px'),
       ('text-align', 'left'),
-      ('text-transform', 'uppercase'),
       ]
     styles = [
       dict(selector="th", props=th_props),
@@ -336,8 +336,7 @@ def ai_insights():
     #Employee upskilling
 
     employee_data = db.child('employees').get()
-    employee_df = pd.DataFrame(map(lambda x: generate_recommendations(x),list(employee_data)))
-
+    employee_df = pd.DataFrame(map(lambda x: generate_recommendations(x),list(employee_data)), columns=['Recommendations'])
 
 
     df3 = employee_df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
