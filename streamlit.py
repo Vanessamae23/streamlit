@@ -332,40 +332,6 @@ def ai_insights():
     ]
     df2 = feedback_df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
     st.table(df2)
-  def ai_insights():
-      st.header("Artificial Intelligence Insights")
-      #Feedback
-      feedback_sentiment_pipeline = load_sentiment_pipeline()
-      feedback_data = db.child('feedback').get()
-      feedback_json_data = json.dumps(feedback_data.val(), indent=4)
-      json_dict = json.loads(feedback_json_data)
-      feedback_df = pd.DataFrame(json_dict.values())
-      feedback_df.rename(columns = {0:'feedback'}, inplace = True)
-      feedback_df['Sentiment (1 to 5)'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['label'][:-5])
-      feedback_df['score'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['score'])
-
-      # Define a function to apply text wrap styling to the DataFrame
-      th_props = [
-        ('font-size', '14px'),
-        ('text-align', 'left'),
-        ('font-weight', 'bold'),
-        ('color', '#fff'),
-        ('text-transform', 'uppercase'),
-        ('background-color', '#808080')
-        ]
-                                    
-      td_props = [
-        ('font-size', '12px'),
-        ('text-align', 'left'),
-        ('text-transform', 'uppercase'),
-        ]
-      styles = [
-        dict(selector="th", props=th_props),
-        dict(selector="td", props=td_props)
-      ]
-      df2 = feedback_df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
-      st.table(df2)
-
 
     #Employee upskilling
 
@@ -376,10 +342,6 @@ def ai_insights():
 
     df3 = employee_df.style.set_properties(**{'text-align': 'left'}).set_table_styles(styles)
     st.table(df3)
-
-    # feedback_df['Get Recommendations'] =  feedback_data.val().apply(lambda x: generate_recommendations(employee_data.child(x).get()))
-
-
 
 
 # Create a sidebar with tabs

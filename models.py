@@ -31,4 +31,6 @@ def generate_recommendations(employee_data):
 def parse_employee_data(employee_data):
     data_json = json.dumps(employee_data.val(), indent=4)
     data_dict = json.loads(data_json)
+    if 'skillsReview' not in data_dict:
+        return ""
     return "Name:{}\n Position:{}\n Skills Review:{}\n Education:{}".format(data_dict['name'], data_dict['position'], data_dict['skillsReview'], data_dict['education'])
