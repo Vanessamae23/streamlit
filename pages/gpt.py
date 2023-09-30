@@ -1,5 +1,4 @@
 import streamlit as st
-import json
 from pyudemy import Udemy
 import streamlit.components.v1 as components
 
