@@ -342,18 +342,18 @@ def ai_insights():
     st.table(df3)
 
 
-    # Create a sidebar with tabs
-    selected_view = st.sidebar.selectbox("Select a view:", ["Employee Data", "Analytics Dashboard",  "Artificial Intelligence Insights"])
+# Create a sidebar with tabs
+selected_view = st.sidebar.selectbox("Select a view:", ["Employee Data", "Analytics Dashboard",  "Artificial Intelligence Insights"])
 
-    # Define a dictionary to map view names to functions
-    views = {
-        "Employee Data": employee_data,
-        "Analytics Dashboard": analytics_dashboard,
-        "Artificial Intelligence Insights": ai_insights
-    }
+# Define a dictionary to map view names to functions
+views = {
+    "Employee Data": employee_data,
+    "Analytics Dashboard": analytics_dashboard,
+    "Artificial Intelligence Insights": ai_insights
+}
 
-    # Display the selected view
-    if selected_view in views:
-        views[selected_view]()  # Call the selected view function
-    else:
-        st.write("Invalid view selection.")
+# Display the selected view
+if selected_view in views:
+    views[selected_view]()  # Call the selected view function
+else:
+    st.write("Invalid view selection.")
