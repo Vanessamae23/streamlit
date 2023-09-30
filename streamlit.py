@@ -31,12 +31,7 @@ st.markdown(hide_default_format, unsafe_allow_html=True)
 # Create a function for each view or tab
 def employee_data():
     st.header("Employee Data")
-    
-    data = db.child('employees').get()
-    json_data = json.dumps(data.val(), indent=4)
-    json_dict = json.loads(json_data)
-    df = pd.DataFrame(json_dict.values())
-    
+        
     # Apply styling to the DataFrame
     th_props = [
       ('font-size', '14px'),
@@ -61,7 +56,7 @@ def employee_data():
 if 'authenticated' not in st.session_state:
   email = st.sidebar.text_input('Enter your email address')
   password = st.sidebar.text_input('Enter your password', type = 'password')
-  submit = st.sidebar.button('Sign Up')
+  submit = st.sidebar.button('Sign In')
   if submit :
       try: 
           user = auth.sign_in_with_email_and_password(email, password)
@@ -79,7 +74,8 @@ if 'authenticated' not in st.session_state:
                   
                   data = db.child('employees').get()
                   json_data = json.dumps(data.val(), indent=4)
-                  df = pd.read_json(json_data).T
+                  json_dict = json.loads(json_data)
+                  df = pd.DataFrame(json_dict.values())
                   
                   # Apply styling to the DataFrame
                   th_props = [
