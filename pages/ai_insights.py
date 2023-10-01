@@ -45,7 +45,7 @@ try :
     st.table(df)
 
     selected_employees = st.multiselect(
-        "Select Employees",
+        "Select Employee",
         df['name'])
 
     udemy = Udemy(st.secrets['UDEMY_CLIENT_ID'], st.secrets['UDEMY_CLIENT_SECRET'])
@@ -77,7 +77,7 @@ try :
             }
         )
     
-    for employee_id in employee_ids:
-        db.child("recommended_courses").child(employee_id).set(list(map(lambda x: x.title, data['results'][:10])))
+    # for employee_id in employee_ids:
+    #     db.child("recommended_courses").child(employee_id).set(list(map(lambda x: x.title, data['results'][:10])))
 except Exception as e :
     st.error(e)
