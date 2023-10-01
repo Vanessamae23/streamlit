@@ -158,7 +158,6 @@ if 'authenticated' not in st.session_state:
             td_props = [
               ('font-size', '12px'),
               ('text-align', 'left'),
-              ('text-transform', 'uppercase'),
               ]
             styles = [
               dict(selector="th", props=th_props),
@@ -222,11 +221,7 @@ else :
   def analytics_dashboard():
       st.header("Analytics Dashboard")
       #Skills
-      data = db.child('employees').get()
-      json_data = json.dumps(data.val(), indent=4)
-      json_dict = json.loads(json_data)
-      df = pd.DataFrame(json_dict.values())[['id', 'name', 'email', 'gender', 'education', 'position', 'performance', 'points']]
-
+      
       skills_data = db.child('skills').get()
       json_data = json.dumps(skills_data.val(), indent=4)
       json_dict = json.loads(json_data)
