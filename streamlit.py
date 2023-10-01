@@ -50,7 +50,7 @@ if 'authenticated' not in st.session_state:
             data = db.child('employees').get()
             json_data = json.dumps(data.val(), indent=4)
             json_dict = json.loads(json_data)
-            df = pd.DataFrame(json_dict.values())
+            df = pd.DataFrame(json_dict.values())[['id', 'name', 'email', 'gender', 'education', 'position', 'performance', 'points']]
             
             # Apply styling to the DataFrame
             th_props = [
@@ -80,11 +80,16 @@ if 'authenticated' not in st.session_state:
             #Skills
             data = db.child('employees').get()
             json_data = json.dumps(data.val(), indent=4)
-            df = pd.read_json(json_data).T
+            json_dict = json.loads(json_data)
+            df = pd.DataFrame(json_dict.values())[['id', 'name', 'email', 'gender', 'education', 'position', 'performance', 'points']]
+
+
 
             skills_data = db.child('skills').get()
             skills_json_data = json.dumps(skills_data.val(), indent=4)
-            skills_df = pd.read_json(skills_json_data).T
+            json_dict = json.loads(skills_json_data)
+            skills_df = pd.DataFrame(json_dict.values())
+
             skills_df.style
             # Calculate the mean for each skill
             skill_means = skills_df.mean()
@@ -187,7 +192,9 @@ else :
       
       data = db.child('employees').get()
       json_data = json.dumps(data.val(), indent=4)
-      df = pd.read_json(json_data).T
+      json_dict = json.loads(json_data)
+      df = pd.DataFrame(json_dict.values())[['id', 'name', 'email', 'gender', 'education', 'position', 'performance', 'points']]
+
       
       # Apply styling to the DataFrame
       th_props = [
@@ -217,11 +224,14 @@ else :
       #Skills
       data = db.child('employees').get()
       json_data = json.dumps(data.val(), indent=4)
-      df = pd.read_json(json_data).T
+      json_dict = json.loads(json_data)
+      df = pd.DataFrame(json_dict.values())[['id', 'name', 'email', 'gender', 'education', 'position', 'performance', 'points']]
 
       skills_data = db.child('skills').get()
-      skills_json_data = json.dumps(skills_data.val(), indent=4)
-      skills_df = pd.read_json(skills_json_data).T
+      json_data = json.dumps(skills_data.val(), indent=4)
+      json_dict = json.loads(json_data)
+      skills_df = pd.DataFrame(json_dict.values())
+
       skills_df.style
       # Calculate the mean for each skill
       skill_means = skills_df.mean()

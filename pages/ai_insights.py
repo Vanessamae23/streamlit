@@ -1,6 +1,7 @@
 import streamlit as st
 from pyudemy import Udemy
 import streamlit.components.v1 as components
+from models import load_skills_recognition_pipeline
 
 try :
     st.set_page_config(page_title="AI Employee Analysis", page_icon = "✈️", layout = "centered", initial_sidebar_state = "auto")

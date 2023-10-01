@@ -5,11 +5,11 @@ import openai
 
 @st.cache_resource
 def load_sentiment_pipeline():
-    return pipeline(model="nlptown/bert-base-multilingual-uncased-sentiment")
+    return pipeline("text-classification", model="nlptown/bert-base-multilingual-uncased-sentiment")
 
 @st.cache_resource
 def load_skills_recognition_pipeline():
-    return pipeline(model="algiraldohe/lm-ner-linkedin-skills-recognition")
+    return pipeline("token-classification", model="algiraldohe/lm-ner-linkedin-skills-recognition")
 
 
 ROLE_PLAY_HUMAN_RESOURES_PROMPT = "As a professional human resources manager, give recommendations for upskilling and career development in an encouraging and motivating tone to the following employee with profile."
