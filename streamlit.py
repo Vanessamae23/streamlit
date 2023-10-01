@@ -221,7 +221,11 @@ else :
   def analytics_dashboard():
       st.header("Analytics Dashboard")
       #Skills
-      
+      data = db.child('employees').get()
+      json_data2 = json.dumps(data.val(), indent=4)
+      json_dict2 = json.loads(json_data2)
+      df = pd.DataFrame(json_dict2.values())
+
       skills_data = db.child('skills').get()
       json_data = json.dumps(skills_data.val(), indent=4)
       json_dict = json.loads(json_data)
