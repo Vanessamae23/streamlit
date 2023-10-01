@@ -142,8 +142,7 @@ if 'authenticated' not in st.session_state:
             json_dict = json.loads(feedback_json_data)
             feedback_df = pd.DataFrame(json_dict.values())
             feedback_df.rename(columns = {0:'feedback'}, inplace = True)
-            feedback_df['Sentiment (1 to 5)'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['label'][:-5])
-            feedback_df['score'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['score'])
+            feedback_df['Sentiment'] = feedback_df['feedback'].apply(lambda x: feedback_sentiment_pipeline(x)[0]['score'])
 
             # Define a function to apply text wrap styling to the DataFrame
             th_props = [

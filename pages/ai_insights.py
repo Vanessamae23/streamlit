@@ -55,13 +55,14 @@ try :
             "Setting": "@min"
         }
     ]
-
+    
+    employee_ids = df.loc[df['name'].isin(selected_employees)]['id'].tolist()
     udemy_search_keywords = df.loc[df['name'].isin(selected_employees)]['Skills Interested'].apply(lambda x: x.split(',')).explode().unique().tolist()
 
     data = (udemy.courses(page=1, page_size=10, search=udemy_search_keywords))
 
 
-    for val in data['results'][:10] :
+    for val in data['results'][:10]:
         card(
             title = val['title'],
             text = val['headline'],
@@ -72,11 +73,11 @@ try :
                 "padding": "0",
                 "width": "300px",
                 "height": "300px"
-                # "border-radius": "60px",
-                # "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
                 }
             }
         )
     
+    for employee_id in employee_ids:
+        db.child("recommended_courses").child(employee_id).set(list(map(lambda x: x.title, data['results'][:10])))
 except Exception as e :
     st.error(e)
